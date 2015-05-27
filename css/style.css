@@ -1,0 +1,10 @@
+.row, .row.collapse { max-width: 100%; }
+.columns { padding: 0; }
+[class*="column"] + [class*="column"]:last-child { float: left; }
+.reveal-modal.full { height: auto; }
+button, .button { margin-bottom: 0; }
+input[type="text"] { font-size: 13px; margin-bottom: 0; height: 1.7rem; text-align: center; }
+#pipeline input[type="text"] { font-size: 10px; }
+label.prefix, span.prefix { height: 1.7rem; line-height: 1.7rem; }
+#editor { height: 519px; resize: none; margin-bottom: 0; }
+#run { margin-bottom: 0; }

@@ -1,0 +1,133 @@
+.data
+arr: .word 10 20
+.text
+main:
+lw $t0, 0(arr)
+lw $t1, 4(arr)
+addi $t2, $zero, 4
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+add $t3, $t2, $t0
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+slt $t6, $t3, $t1
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+bne $t6, $zero, LBL
+sw $t1, 8(arr)
+j END
+LBL:
+sw $t3, 8(arr)
+END:
+ 
+##########################################
+# Covers: add, addi, lw, sw, bne, slt, j #
+##########################################
+
+.data
+arr: .word 2560 3
+.text
+main:
+lb $t0, 2(arr)
+lb $t1, 7(arr)
+addi $t2, $zero, 1
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+LOP:
+sub $t0, $t0, $t2
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+slt $t2, $0, $t1
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+beq $t2, $zero, LOP
+sb $t0, 11(arr)
+
+########################################
+# Covers: lb, sb, beq, sub, has a loop #
+########################################
+
+.text
+main:
+addi $a0, $zero, 4
+jal SUM
+j END
+SUM:
+addi $sp, $sp, -8
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+sw $ra, 0($sp)
+sw $a0, 4($sp)
+beq $a0, $zero, BASE
+addi $a0, $a0, -1
+jal SUM
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+lw $ra, 0($sp)
+lw $a0, 4($sp)
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+add $v0, $v0, $a0
+addi $sp, $sp, 8
+jr $ra
+BASE:
+addi $v0, $zero, 0
+jr $ra
+END:
+
+// int sum(n) {
+//	 if (n==0) return 0;
+//	 else return n + sum(n-1);
+// }
+// assuming input n is always >= 0
+
+########################################
+# Covers: jal, jr, has a function call #
+########################################
+
+.text
+main:
+addi $t0, $zero, 5
+addi $t1, $zero, 3
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+and $t2, $t0, $t1 
+addi $t3, $zero, 4
+addi $t6, $zero, 0
+addi $t7, $zero, 0
+sll $t4, $t3, 2
+srl $t5, $t3, 1
+nor $t6, $t0, $t1 
+
+##############################
+# Covers: sll, srl, and, nor #
+##############################
+
+.data
+arr: .word 2560 3
+.text
+main:
+lbu $t0, 2(arr)
+lui $t1, 76
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+sltu $t2, $t0, $t1
+
+##########################
+# Covers: lbu, lui, sltu #
+##########################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
